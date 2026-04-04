@@ -184,23 +184,23 @@ $$P_\Omega(\Lambda_{k+1}) = P_\Omega(\Lambda_k) + \gamma\rho \left(P_\Omega(Z_{k
 where $\gamma \in (0,\, 1.618)$ is the step length.
 
 ---
-
+ 
 ## 📊 Convergence Analysis
-
+ 
 **Lemma.** &ensp; If $\{\Lambda_k\}$ is bounded and $\displaystyle\sum_{k=0}^{\infty} \|\Lambda_{k+1} - \Lambda_k\|_F^2 < \infty$, then
-
+ 
 $$\|W_{k+1} - W_k\|_F^2 \;\to\; 0 \quad \text{as } k \to \infty$$
-
+ 
 where $W_k = (X_k, Y_k, Z_k)$.
-
-**Theorem.** &ensp; Any accumulation point $(X^{*}, Y^{*}, Z^{*}, \Lambda^{*})$ of the iterates satisfies the **KKT conditions**:
-
-$$(X^{*} Y^{*} - Z^{*})(Y^{*})^T = 0, \qquad (X^{*})^T (X^{*} Y^{*} - Z^{*}) = 0$$
-
-$$P_{\Omega^c}(Z^{*}) = P_{\Omega^c}(X^{*} Y^{*}), \qquad P_{\Omega}(Z^{*}) = P_{\Omega}(M)$$
-
+ 
+**Theorem.** &ensp; Any accumulation point $(X^{\ast}, Y^{\ast}, Z^{\ast}, \Lambda^{\ast})$ of the iterates satisfies the **KKT conditions**:
+ 
+$$(X^{\ast} Y^{\ast} - Z^{\ast})(Y^{\ast})^T = 0, \qquad (X^{\ast})^T (X^{\ast} Y^{\ast} - Z^{\ast}) = 0$$
+ 
+$$P_{\Omega^c}(Z^{\ast}) = P_{\Omega^c}(X^{\ast} Y^{\ast}), \qquad P_{\Omega}(Z^{\ast}) = P_{\Omega}(M)$$
+ 
 This guarantees convergence to a **stationary point** of the non-convex problem.
-
+ 
 ---
 
 ## 📦 Datasets
