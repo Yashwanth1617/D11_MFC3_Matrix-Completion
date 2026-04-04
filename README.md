@@ -64,7 +64,7 @@ We replicate and validate results on:
 
 Given a partially observed matrix $M \in \mathbb{R}^{m \times n}$, recover a **low-rank** matrix $X \in \mathbb{R}^{m \times n}$ such that:
 
-$$\min_{X \in \mathbb{R}^{m \times n}} \operatorname{rank}(X) \quad \text{subject to} \quad X_{ij} = M_{ij}, \quad \forall\,(i,j) \in \Omega$$
+$$\min_{X \in \mathbb{R}^{m \times n}} \text{rank}(X) \quad \text{subject to} \quad X_{ij} = M_{ij}, \quad \forall\,(i,j) \in \Omega$$
 
 where $\Omega \subseteq \{(i,j) : 1 \leq i \leq m,\; 1 \leq j \leq n\}$ is the index set of **known (observed) entries**.
 
@@ -75,7 +75,7 @@ The rank function is:
 - **NP-hard** to minimize directly — no polynomial-time algorithm is known for the general case.
 - **Non-convex** — a convex combination of two low-rank matrices can have higher rank, violating the convexity condition:
 
-$$\operatorname{rank}\!\bigl(\theta X_1 + (1-\theta) X_2\bigr) \;\leq\; \theta\cdot\operatorname{rank}(X_1) + (1-\theta)\cdot\operatorname{rank}(X_2) \quad \textit{(not guaranteed)}$$
+$$\text{rank}(\theta X_1 + (1-\theta) X_2) \;\leq\; \theta\cdot\text{rank}(X_1) + (1-\theta)\cdot\text{rank}(X_2) \quad \text{(not guaranteed)}$$
 
 ---
 
@@ -156,7 +156,7 @@ Output: (X_{k+1}, Y_{k+1}, Z_{k+1}, Λ_{k+1})
 
 Minimizing $\tfrac{1}{2}\|X Y_k - Z_k\|_F^2$ with respect to $X$:
 
-$$X_{k+1} = Z_k\, Y_k^T \!\left(Y_k\, Y_k^T\right)^{-1}$$
+$$X_{k+1} = Z_k Y_k^T \left(Y_k Y_k^T\right)^{-1}$$
 
 ### Y-Update (Eq. 9)
 
@@ -169,17 +169,17 @@ $$Y_{k+1} = \left(X_{k+1}^T X_{k+1}\right)^{-1} X_{k+1}^T\, Z_k$$
 Split by observed / unobserved entries:
 
 - **Unobserved** $(i,j) \notin \Omega$: &emsp; $Z_{ij} = A_{ij}$, &ensp; where $A = X_{k+1} Y_{k+1}$
-- **Observed** $(i,j) \in \Omega$: &emsp; $\displaystyle Z_{ij} = \frac{1}{1+\rho}\!\left(A_{ij} + \rho\, M_{ij} - \Lambda_{ij}\right)$
+- **Observed** $(i,j) \in \Omega$: &emsp; $\displaystyle Z_{ij} = \frac{1}{1+\rho} \left(A_{ij} + \rho\, M_{ij} - \Lambda_{ij}\right)$
 
 Combined in matrix form:
 
-$$Z_{k+1} = P_{\Omega^c}(A) + \frac{1}{1+\rho}\!\left(P_\Omega(A) + \rho\, P_\Omega(M) - P_\Omega(\Lambda_k)\right)$$
+$$Z_{k+1} = P_{\Omega^c}(A) + \frac{1}{1+\rho} \left(P_\Omega(A) + \rho\, P_\Omega(M) - P_\Omega(\Lambda_k)\right)$$
 
 ### Λ-Update (Eq. 11)
 
 Dual variable gradient ascent:
 
-$$P_\Omega(\Lambda_{k+1}) = P_\Omega(\Lambda_k) + \gamma\rho\!\left(P_\Omega(Z_{k+1}) - P_\Omega(M)\right)$$
+$$P_\Omega(\Lambda_{k+1}) = P_\Omega(\Lambda_k) + \gamma\rho \left(P_\Omega(Z_{k+1}) - P_\Omega(M)\right)$$
 
 where $\gamma \in (0,\, 1.618)$ is the step length.
 
@@ -195,9 +195,9 @@ where $W_k = (X_k, Y_k, Z_k)$.
 
 **Theorem.** &ensp; Any accumulation point $(X^*, Y^*, Z^*, \Lambda^*)$ of the iterates satisfies the **KKT conditions**:
 
-$$\left(X^* Y^* - Z^*\right)(Y^*)^T = 0, \qquad (X^*)^T\!\left(X^* Y^* - Z^*\right) = 0$$
+$$(X^* Y^* - Z^*)(Y^*)^T = 0, \qquad (X^*)^T (X^* Y^* - Z^*) = 0$$
 
-$$P_{\Omega^c}(Z^*) = P_{\Omega^c}(X^* Y^*), \qquad P_\Omega(Z^*) = P_\Omega(M)$$
+$$P_{\Omega^c}(Z^*) = P_{\Omega^c}(X^* Y^*), \qquad P_{\Omega}(Z^*) = P_{\Omega}(M)$$
 
 This guarantees convergence to a **stationary point** of the non-convex problem.
 
@@ -244,7 +244,7 @@ Implementation of the core ADMM-Factorization algorithm verified against the pap
 
 ![Basic ADMM Result](results/basic_admm_result.png)
 
-*Actual MATLAB output. Left: the $5 \times 4$ input matrix with alternating observed / missing entries. Right: the rank-2 completed matrix $X \times Y$ — all observed entries (e.g. 3, 4, 5, 6, 7, 8, 9, 10) are recovered exactly; missing entries are filled by the low-rank factorization. The algorithm ran for 1000 iterations and converged to a final relative error of $1.09 \times 10^{-8}$, confirming the rank-2 structure ($\operatorname{rank}(XY) = 2$).*
+*Actual MATLAB output. Left: the $5 \times 4$ input matrix with alternating observed / missing entries. Right: the rank-2 completed matrix $X \times Y$ — all observed entries (e.g. 3, 4, 5, 6, 7, 8, 9, 10) are recovered exactly; missing entries are filled by the low-rank factorization. The algorithm ran for 1000 iterations and converged to a final relative error of $1.09 \times 10^{-8}$, confirming the rank-2 structure ($\text{rank}(XY) = 2$).*
 
 ### Experiment 2: Noiseless Synthetic Matrices (First Class)
 
