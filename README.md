@@ -193,11 +193,11 @@ $$\|W_{k+1} - W_k\|_F^2 \;\to\; 0 \quad \text{as } k \to \infty$$
 
 where $W_k = (X_k, Y_k, Z_k)$.
 
-**Theorem.** &ensp; Any accumulation point $(X^*, Y^*, Z^*, \Lambda^*)$ of the iterates satisfies the **KKT conditions**:
+**Theorem.** &ensp; Any accumulation point $(X^{*}, Y^{*}, Z^{*}, \Lambda^{*})$ of the iterates satisfies the **KKT conditions**:
 
-$$(X^* Y^* - Z^*)(Y^*)^T = 0, \qquad (X^*)^T (X^* Y^* - Z^*) = 0$$
+$$(X^{*} Y^{*} - Z^{*})(Y^{*})^T = 0, \qquad (X^{*})^T (X^{*} Y^{*} - Z^{*}) = 0$$
 
-$$P_{\Omega^c}(Z^*) = P_{\Omega^c}(X^* Y^*), \qquad P_{\Omega}(Z^*) = P_{\Omega}(M)$$
+$$P_{\Omega^c}(Z^{*}) = P_{\Omega^c}(X^{*} Y^{*}), \qquad P_{\Omega}(Z^{*}) = P_{\Omega}(M)$$
 
 This guarantees convergence to a **stationary point** of the non-convex problem.
 
