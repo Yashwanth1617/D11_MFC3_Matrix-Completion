@@ -1,3 +1,10 @@
+<br/>
+
+<div align="center">
+<img src="results/Amrita-vishwa-vidyapeetham-logo.svg.png" width="820"/>
+</div>
+
+<br/>
 <div align="center">
 
 # 🧮 ADMM-Factorization Algorithm for Low Rank Matrix Completion
